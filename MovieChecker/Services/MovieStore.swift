@@ -17,15 +17,34 @@ class MovieStore: MovieService {
     private let jsonDecoder = Utilis.jsondDecoder
     
     func fetchMovies(from endpoint: MovieListEndpoint, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
-        <#code#>
+        guard let url = URL(string: "\(baseAPIURL)/movie/\(endpoint.rawValue)") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url, completion: completion)
     }
     
     func fetchMovie(id: Int, completion: @escaping (Result<Movie, MovieError>) -> ()) {
-        <#code#>
+        guard let url = URL(string: "\(baseAPIURL)/movie/\(id)") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url, params: [
+            "append_to_response":"videos,credits"
+        ], completion: completion)
     }
     
     func searchMovie(query: String, completion: @escaping (Result<Movie, MovieError>) -> ()) {
-        <#code#>
+        guard let url = URL(string: "\(baseAPIURL)/search/movie)") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url, params: [
+            "language":"en-US",
+            "include_adult":"false",
+            "region":"US",
+            "query":query
+        ], completion: completion)
     }
     ///helper method URL into data, optional dictionary as a parameter
     private func loadURLAndDecode<D: Decodable>(url: URL, params: [String: String]? = nil, completion: @escaping (Result<D, MovieError>) -> ()) {
@@ -41,6 +60,7 @@ class MovieStore: MovieService {
         
         guard let finalURL = urlComponents.url else {
             completion(.failure(.invalidEndpoint))
+            return
         }
         urlSession.dataTask(with: finalURL) { [weak self] (data, response, error) in
             guard let self = self else { return }
@@ -51,6 +71,7 @@ class MovieStore: MovieService {
             }
             guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
                 self.executeCompletionHandlerInMainThread(with: .failure(.invalidEndpoint), completion: completion)
+                return
             }
             guard let data = data else {
                 self.executeCompletionHandlerInMainThread(with: .failure(.noData), completion: completion)
