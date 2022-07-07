@@ -15,6 +15,10 @@
 		1707448F287427DB0055ADA2 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1707448E287427DB0055ADA2 /* MovieService.swift */; };
 		1707449228742F470055ADA2 /* MovieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1707449128742F470055ADA2 /* MovieStore.swift */; };
 		170744942874344D0055ADA2 /* Utilis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170744932874344D0055ADA2 /* Utilis.swift */; };
+		17457D112876E1A600E94F0F /* Movie-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17457D102876E1A600E94F0F /* Movie-Extensions.swift */; };
+		1752F5012876FCB700651AE2 /* movie_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 1752F4FE2876FCB700651AE2 /* movie_list.json */; };
+		1752F5022876FCB700651AE2 /* movie_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 1752F4FF2876FCB700651AE2 /* movie_info.json */; };
+		1752F5032876FCB700651AE2 /* search_movie.json in Resources */ = {isa = PBXBuildFile; fileRef = 1752F5002876FCB700651AE2 /* search_movie.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +31,10 @@
 		1707448E287427DB0055ADA2 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 		1707449128742F470055ADA2 /* MovieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStore.swift; sourceTree = "<group>"; };
 		170744932874344D0055ADA2 /* Utilis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilis.swift; sourceTree = "<group>"; };
+		17457D102876E1A600E94F0F /* Movie-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie-Extensions.swift"; sourceTree = "<group>"; };
+		1752F4FE2876FCB700651AE2 /* movie_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_list.json; sourceTree = "<group>"; };
+		1752F4FF2876FCB700651AE2 /* movie_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_info.json; sourceTree = "<group>"; };
+		1752F5002876FCB700651AE2 /* search_movie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search_movie.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,7 @@
 				1707447C287322070055ADA2 /* MovieCheckerApp.swift */,
 				1707447E287322070055ADA2 /* ContentView.swift */,
 				170744932874344D0055ADA2 /* Utilis.swift */,
+				1752F4F72876F76400651AE2 /* Resources */,
 				1707448D287427CB0055ADA2 /* Services */,
 				1707448A287422B50055ADA2 /* Models */,
 				17074480287322090055ADA2 /* Assets.xcassets */,
@@ -82,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				1707448B287422CD0055ADA2 /* Movie.swift */,
+				17457D102876E1A600E94F0F /* Movie-Extensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -93,6 +103,16 @@
 				1707449128742F470055ADA2 /* MovieStore.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		1752F4F72876F76400651AE2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1752F4FE2876FCB700651AE2 /* movie_list.json */,
+				1752F4FF2876FCB700651AE2 /* movie_info.json */,
+				1752F5002876FCB700651AE2 /* search_movie.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +174,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				17074484287322090055ADA2 /* Preview Assets.xcassets in Resources */,
+				1752F5012876FCB700651AE2 /* movie_list.json in Resources */,
+				1752F5022876FCB700651AE2 /* movie_info.json in Resources */,
+				1752F5032876FCB700651AE2 /* search_movie.json in Resources */,
 				17074481287322090055ADA2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,6 +191,7 @@
 				1707447F287322070055ADA2 /* ContentView.swift in Sources */,
 				1707447D287322070055ADA2 /* MovieCheckerApp.swift in Sources */,
 				1707448F287427DB0055ADA2 /* MovieService.swift in Sources */,
+				17457D112876E1A600E94F0F /* Movie-Extensions.swift in Sources */,
 				1707448C287422CD0055ADA2 /* Movie.swift in Sources */,
 				1707449228742F470055ADA2 /* MovieStore.swift in Sources */,
 				170744942874344D0055ADA2 /* Utilis.swift in Sources */,
