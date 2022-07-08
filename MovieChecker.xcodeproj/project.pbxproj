@@ -19,6 +19,8 @@
 		1752F5012876FCB700651AE2 /* movie_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 1752F4FE2876FCB700651AE2 /* movie_list.json */; };
 		1752F5022876FCB700651AE2 /* movie_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 1752F4FF2876FCB700651AE2 /* movie_info.json */; };
 		1752F5032876FCB700651AE2 /* search_movie.json in Resources */ = {isa = PBXBuildFile; fileRef = 1752F5002876FCB700651AE2 /* search_movie.json */; };
+		1752F530287818B900651AE2 /* MovieBackdropCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752F52F287818B900651AE2 /* MovieBackdropCard.swift */; };
+		1752F533287818FA00651AE2 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1752F532287818FA00651AE2 /* ImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		1752F4FE2876FCB700651AE2 /* movie_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_list.json; sourceTree = "<group>"; };
 		1752F4FF2876FCB700651AE2 /* movie_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_info.json; sourceTree = "<group>"; };
 		1752F5002876FCB700651AE2 /* search_movie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search_movie.json; sourceTree = "<group>"; };
+		1752F52F287818B900651AE2 /* MovieBackdropCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBackdropCard.swift; sourceTree = "<group>"; };
+		1752F532287818FA00651AE2 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 				1707447C287322070055ADA2 /* MovieCheckerApp.swift */,
 				1707447E287322070055ADA2 /* ContentView.swift */,
 				170744932874344D0055ADA2 /* Utilis.swift */,
+				1752F531287818E600651AE2 /* Bindings */,
+				1752F52E2878186D00651AE2 /* Views */,
 				1752F4F72876F76400651AE2 /* Resources */,
 				1707448D287427CB0055ADA2 /* Services */,
 				1707448A287422B50055ADA2 /* Models */,
@@ -113,6 +119,22 @@
 				1752F5002876FCB700651AE2 /* search_movie.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		1752F52E2878186D00651AE2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1752F52F287818B900651AE2 /* MovieBackdropCard.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1752F531287818E600651AE2 /* Bindings */ = {
+			isa = PBXGroup;
+			children = (
+				1752F532287818FA00651AE2 /* ImageLoader.swift */,
+			);
+			path = Bindings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,8 +212,10 @@
 			files = (
 				1707447F287322070055ADA2 /* ContentView.swift in Sources */,
 				1707447D287322070055ADA2 /* MovieCheckerApp.swift in Sources */,
+				1752F530287818B900651AE2 /* MovieBackdropCard.swift in Sources */,
 				1707448F287427DB0055ADA2 /* MovieService.swift in Sources */,
 				17457D112876E1A600E94F0F /* Movie-Extensions.swift in Sources */,
+				1752F533287818FA00651AE2 /* ImageLoader.swift in Sources */,
 				1707448C287422CD0055ADA2 /* Movie.swift in Sources */,
 				1707449228742F470055ADA2 /* MovieStore.swift in Sources */,
 				170744942874344D0055ADA2 /* Utilis.swift in Sources */,
