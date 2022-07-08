@@ -14,7 +14,7 @@ class MovieStore: MovieService {
     private let apiKey = "e49f0b5689c7385bb0756d511c37ea8f"
     private let baseAPIURL = "https://api.themoviedb.org"
     private let urlSession = URLSession.shared
-    private let jsonDecoder = Utilis.jsondDecoder
+    private let jsonDecoder = Utilis.jsonDecoder
     
     func fetchMovies(from endpoint: MovieListEndpoint, completion: @escaping (Result<MovieResponse, MovieError>) -> ()) {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(endpoint.rawValue)") else {

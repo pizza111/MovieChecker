@@ -25,7 +25,7 @@ extension Bundle {
         guard let data = try? Data(contentsOf: url) else {
             fatalError()
         }
-        let jsonDecoder = Utilis.jsondDecoder
+        let jsonDecoder = Utilis.jsonDecoder
         
         guard let decoded = try? jsonDecoder.decode(T.self, from: data) else {
             fatalError()
