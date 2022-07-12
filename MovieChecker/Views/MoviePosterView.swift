@@ -28,6 +28,7 @@ struct MoviePosterView: View {
                 }
             }
         }
+        .navigationTitle(title)
     }
 }
 

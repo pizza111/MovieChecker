@@ -17,7 +17,7 @@ struct MovieBackdropCard: View {
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))
                 
-                if self.imageLoader.image != nil {
+                if imageLoader.image != nil {
                     Image(uiImage: imageLoader.image!)
                         .resizable()
                 }
@@ -29,7 +29,7 @@ struct MovieBackdropCard: View {
         }
         .lineLimit(1)
         .onAppear {
-            self.imageLoader.loadImage(with: self.movie.backdropURL)
+            imageLoader.loadImage(with: movie.backdropURL)
         }
     }
 }
