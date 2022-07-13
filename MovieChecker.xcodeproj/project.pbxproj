@@ -15,6 +15,8 @@
 		1707448F287427DB0055ADA2 /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1707448E287427DB0055ADA2 /* MovieService.swift */; };
 		1707449228742F470055ADA2 /* MovieStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1707449128742F470055ADA2 /* MovieStore.swift */; };
 		170744942874344D0055ADA2 /* Utilis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170744932874344D0055ADA2 /* Utilis.swift */; };
+		173CED80287F031F00681F8E /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173CED7F287F031F00681F8E /* MovieDetailsView.swift */; };
+		173CED82287F03B300681F8E /* MovieDetailsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173CED81287F03B300681F8E /* MovieDetailsState.swift */; };
 		17457D112876E1A600E94F0F /* Movie-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17457D102876E1A600E94F0F /* Movie-Extensions.swift */; };
 		1752F5012876FCB700651AE2 /* movie_list.json in Resources */ = {isa = PBXBuildFile; fileRef = 1752F4FE2876FCB700651AE2 /* movie_list.json */; };
 		1752F5022876FCB700651AE2 /* movie_info.json in Resources */ = {isa = PBXBuildFile; fileRef = 1752F4FF2876FCB700651AE2 /* movie_info.json */; };
@@ -40,6 +42,8 @@
 		1707448E287427DB0055ADA2 /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 		1707449128742F470055ADA2 /* MovieStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieStore.swift; sourceTree = "<group>"; };
 		170744932874344D0055ADA2 /* Utilis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilis.swift; sourceTree = "<group>"; };
+		173CED7F287F031F00681F8E /* MovieDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsView.swift; sourceTree = "<group>"; };
+		173CED81287F03B300681F8E /* MovieDetailsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsState.swift; sourceTree = "<group>"; };
 		17457D102876E1A600E94F0F /* Movie-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie-Extensions.swift"; sourceTree = "<group>"; };
 		1752F4FE2876FCB700651AE2 /* movie_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_list.json; sourceTree = "<group>"; };
 		1752F4FF2876FCB700651AE2 /* movie_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movie_info.json; sourceTree = "<group>"; };
@@ -86,7 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				1707447C287322070055ADA2 /* MovieCheckerApp.swift */,
-				1707447E287322070055ADA2 /* ContentView.swift */,
 				170744932874344D0055ADA2 /* Utilis.swift */,
 				1752F531287818E600651AE2 /* Bindings */,
 				1752F52E2878186D00651AE2 /* Views */,
@@ -143,7 +146,9 @@
 				1752F552287ACFB700651AE2 /* MovieBackdropView.swift */,
 				1752F554287AF41900651AE2 /* MoviePosterCard.swift */,
 				1752F556287AFBF200651AE2 /* MoviePosterView.swift */,
+				1707447E287322070055ADA2 /* ContentView.swift */,
 				1752F563287C226B00651AE2 /* MovieListView.swift */,
+				173CED7F287F031F00681F8E /* MovieDetailsView.swift */,
 				1752F561287BBF7000651AE2 /* LoadingView.swift */,
 			);
 			path = Views;
@@ -154,6 +159,7 @@
 			children = (
 				1752F532287818FA00651AE2 /* ImageLoader.swift */,
 				1752F558287AFFB300651AE2 /* MovieListState.swift */,
+				173CED81287F03B300681F8E /* MovieDetailsState.swift */,
 			);
 			path = Bindings;
 			sourceTree = "<group>";
@@ -247,10 +253,12 @@
 				1752F564287C226B00651AE2 /* MovieListView.swift in Sources */,
 				1752F555287AF41900651AE2 /* MoviePosterCard.swift in Sources */,
 				1752F559287AFFB300651AE2 /* MovieListState.swift in Sources */,
+				173CED80287F031F00681F8E /* MovieDetailsView.swift in Sources */,
 				17457D112876E1A600E94F0F /* Movie-Extensions.swift in Sources */,
 				1752F562287BBF7000651AE2 /* LoadingView.swift in Sources */,
 				1752F533287818FA00651AE2 /* ImageLoader.swift in Sources */,
 				1707448C287422CD0055ADA2 /* Movie.swift in Sources */,
+				173CED82287F03B300681F8E /* MovieDetailsState.swift in Sources */,
 				1752F553287ACFB700651AE2 /* MovieBackdropView.swift in Sources */,
 				1707449228742F470055ADA2 /* MovieStore.swift in Sources */,
 				170744942874344D0055ADA2 /* Utilis.swift in Sources */,
