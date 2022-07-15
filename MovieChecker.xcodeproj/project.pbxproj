@@ -142,13 +142,13 @@
 			isa = PBXGroup;
 			children = (
 				1752F55A287BB3F200651AE2 /* UIKitViews */,
+				173CED7F287F031F00681F8E /* MovieDetailsView.swift */,
 				1752F52F287818B900651AE2 /* MovieBackdropCard.swift */,
 				1752F552287ACFB700651AE2 /* MovieBackdropView.swift */,
 				1752F554287AF41900651AE2 /* MoviePosterCard.swift */,
 				1752F556287AFBF200651AE2 /* MoviePosterView.swift */,
 				1707447E287322070055ADA2 /* ContentView.swift */,
 				1752F563287C226B00651AE2 /* MovieListView.swift */,
-				173CED7F287F031F00681F8E /* MovieDetailsView.swift */,
 				1752F561287BBF7000651AE2 /* LoadingView.swift */,
 			);
 			path = Views;
