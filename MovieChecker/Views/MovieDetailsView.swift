@@ -87,6 +87,19 @@ struct MovieDetailsListView: View {
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 }
             }
+            if movie.youtubeTrailers != nil && movie.youtubeTrailers!.count > 0 {
+                Text("Trailers")
+                    .font(.headline)
+                ForEach(movie.youtubeTrailers!) { trailer in
+                    Button {
+                        
+                    } label: {
+                        HStack {
+                            Text(trailer.name)
+                        }
+                    }
+                }
+            }
         }
     }
 }
