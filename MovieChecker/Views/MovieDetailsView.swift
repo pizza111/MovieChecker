@@ -29,10 +29,12 @@ struct MovieDetailsView: View {
 
 struct MovieDetailsListView: View {
     let movie: Movie
-    
+    @State private var selectedTrailer: MovieVideo?
+    private let imageLoader = ImageLoader() 
+        
     var body: some View {
         List {
-            MovieDetailsImage(imageURL: movie.backdropURL)
+            MovieDetailsImage(imageLoader: imageLoader, imageURL: movie.backdropURL)
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             HStack {
                 Text(movie.genreText)
@@ -92,20 +94,27 @@ struct MovieDetailsListView: View {
                     .font(.headline)
                 ForEach(movie.youtubeTrailers!) { trailer in
                     Button {
-                        
+                        selectedTrailer = trailer
                     } label: {
                         HStack {
                             Text(trailer.name)
+                            Spacer()
+                            Image(systemName: "play.circle.fill")
+                                .foregroundColor(Color(uiColor: .systemBlue))
                         }
                     }
                 }
             }
         }
+        .sheet(item: $selectedTrailer) { trailer in
+            SafariView(url: trailer.youtubeURL!)
+        }
     }
 }
 
 struct MovieDetailsImage: View {
-    @ObservedObject private var imageLoader = ImageLoader()
+    @ObservedObject  var imageLoader: ImageLoader
+//    @ObservedObject private var imageLoader = ImageLoader()
     let imageURL: URL
     
     var body: some View {
@@ -127,7 +136,7 @@ struct MovieDetailsImage: View {
 struct MovieDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MovieDetailsView(movieId: Movie.stubbedMovie.id)            
+            MovieDetailsView(movieId: Movie.stubbedMovie.id)
         }
     }
 }
