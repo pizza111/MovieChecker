@@ -21,10 +21,15 @@ struct MovieBackdropView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 16) {
                     ForEach(movies) { movie in
-                        MovieBackdropCard(movie: movie)
-                            .frame(width: 272, height: 200)
-                            .padding(.leading, movie.id == movies.first?.id ? 16 : 0)
-                            .padding(.trailing, movie.id == movies.last?.id ? 16 : 0)
+                        NavigationLink {
+                            MovieDetailsView(movieId: movie.id)
+                        } label: {
+                            MovieBackdropCard(movie: movie)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .frame(width: 272, height: 200)
+                        .padding(.leading, movie.id == movies.first?.id ? 16 : 0)
+                        .padding(.trailing, movie.id == movies.last?.id ? 16 : 0)
                     }
                 }
             }

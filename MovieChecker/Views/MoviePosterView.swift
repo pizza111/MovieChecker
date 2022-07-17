@@ -21,9 +21,14 @@ struct MoviePosterView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 16) {
                     ForEach(movies) { movie in
-                        MoviePosterCard(movie: movie)
-                            .padding(.leading, movie.id == movies.first?.id ? 16 : 0)
-                            .padding(.trailing, movie.id == movies.first?.id ? 16 : 0)
+                        NavigationLink {
+                            MovieDetailsView(movieId: movie.id)
+                        } label: {
+                            MoviePosterCard(movie: movie)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .padding(.leading, movie.id == movies.first?.id ? 16 : 0)
+                        .padding(.trailing, movie.id == movies.first?.id ? 16 : 0)
                     }
                 }
             }
