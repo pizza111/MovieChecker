@@ -17,7 +17,10 @@ struct LoadingView: View {
             if isLoading {
                 HStack {
                     Spacer()
-                    ActivityIndicatorView()
+//                    ActivityIndicatorView()
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .accentColor))
+                        .scaleEffect(2)
                     Spacer()
                 }
             } else if error != nil {
