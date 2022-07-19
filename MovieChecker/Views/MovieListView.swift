@@ -26,6 +26,7 @@ struct MovieListView: View {
                     }
                 }
                 .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                .listRowSeparator(.hidden)
                 
                 Group {
                     if upocomingState.movies != nil {
@@ -37,6 +38,7 @@ struct MovieListView: View {
                     }
                 }
                 .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                .listRowSeparator(.hidden)
                 
                 Group {
                     if topRatedState.movies != nil {
@@ -48,6 +50,7 @@ struct MovieListView: View {
                     }
                 }
                 .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                .listRowSeparator(.hidden)
                 
                 Group {
                     if popularState.movies != nil {
@@ -59,8 +62,10 @@ struct MovieListView: View {
                     }
                 }
                 .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 16, trailing: 0))
+                .listRowSeparator(.hidden)
             }
             .navigationTitle("The Movie")
+            .listStyle(.plain)
             .onAppear {
                 nowPlayingState.loadMovies(with: .nowPlaying)
                 upocomingState.loadMovies(with: .upcoming)

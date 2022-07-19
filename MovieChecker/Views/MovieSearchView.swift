@@ -31,7 +31,6 @@ struct MovieSearchView: View {
                         }
                     }
                 }
-                
             }
             .onAppear {
                 self.movieSearchState.startObserve()
