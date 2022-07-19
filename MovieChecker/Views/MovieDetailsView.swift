@@ -54,7 +54,7 @@ struct MovieDetailsListView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Starring").font(.headline)
                         ForEach(movie.cast!.prefix(9)) { cast in
-                            Text(cast.name )
+                            Text(cast.name)
                         }
                     }
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
