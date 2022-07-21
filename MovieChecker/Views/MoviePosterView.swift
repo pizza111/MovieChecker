@@ -19,18 +19,20 @@ struct MoviePosterView: View {
                 .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top, spacing: 16) {
+                LazyHStack(alignment: .top, spacing: 16) {
                     ForEach(movies) { movie in
                         NavigationLink {
                             MovieDetailsView(movieId: movie.id)
                         } label: {
                             MoviePosterCard(movie: movie)
                         }
-                        .buttonStyle(PlainButtonStyle())
-                        .padding(.leading, movie.id == movies.first?.id ? 16 : 0)
-                        .padding(.trailing, movie.id == movies.first?.id ? 16 : 0)
+                        .buttonStyle(.plain)
+//                        .padding(.leading, movie.id == movies.first?.id ? 16 : 0)
+//                        .padding(.trailing, movie.id == movies.first?.id ? 16 : 0)
                     }
                 }
+                .padding(.horizontal)
+                .padding(.vertical, 8)
             }
         }
         .navigationTitle(title)
