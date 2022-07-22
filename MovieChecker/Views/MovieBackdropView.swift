@@ -24,7 +24,7 @@ struct MovieBackdropView: View {
                         NavigationLink {
                             MovieDetailsView(movieId: movie.id)
                         } label: {
-                            MovieBackdropCard(movie: movie)
+                            MovieThumbnailView(movie: movie)
                         }
                         .buttonStyle(PlainButtonStyle())
                         .frame(width: 272, height: 200)
