@@ -119,6 +119,7 @@
 		1707448A287422B50055ADA2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1707448B287422CD0055ADA2 /* Movie.swift */,
 				17457D102876E1A600E94F0F /* Movie-Extensions.swift */,
 			);
 			path = Models;
@@ -138,7 +139,6 @@
 			children = (
 				1752F4FE2876FCB700651AE2 /* movie_list.json */,
 				1752F4FF2876FCB700651AE2 /* movie_info.json */,
-				1707448B287422CD0055ADA2 /* Movie.swift */,
 				1752F5002876FCB700651AE2 /* search_movie.json */,
 			);
 			path = Resources;
