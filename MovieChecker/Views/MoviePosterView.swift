@@ -24,7 +24,7 @@ struct MoviePosterView: View {
                         NavigationLink {
                             MovieDetailsView(movieId: movie.id)
                         } label: {
-                            MoviePosterCard(movie: movie)
+                            MovieThumbnailView(movie: movie)
                         }
                         .buttonStyle(.plain)
 //                        .padding(.leading, movie.id == movies.first?.id ? 16 : 0)
