@@ -1,5 +1,5 @@
 //
-//  MoviePosterCard.swift
+//  MoviePosterView.swift
 //  MovieChecker
 //
 //  Created by Piotr Woźniak on 10/07/2022.
@@ -7,68 +7,58 @@
 
 import SwiftUI
 
-enum MovieThumbnailType {
-    case poster(showTitle: Bool = false)
-    case backdrop
-}
-
 struct MovieThumbnailView: View {
-    let movie: Movie
-    @StateObject var imageLoader = ImageLoader()
+    let title: String
+    let movies: [Movie]
     var thumbnailType: MovieThumbnailType = .poster()
     
     var body: some View {
-        containerView
-        .onAppear {
-            switch thumbnailType {
-            case .poster:
-                imageLoader.loadImage(with: movie.posterURL)
-            case .backdrop:
-                imageLoader.loadImage(with: movie.backdropURL)
+        VStack(alignment: .leading, spacing: 16) {
+            Text(title)
+                .font(.title)
+                .fontWeight(.bold)
+                .padding(.horizontal)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(alignment: .top, spacing: 16) {
+                    ForEach(movies) { movie in
+                        NavigationLink {
+                            MovieDetailsView(movieId: movie.id)
+                        } label: {
+                            MovieThumbnailCard(movie: movie, thumbnailType: thumbnailType)
+                                .movieThumbnailViewFrame(thumbnailType: thumbnailType)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal)
+                .padding(.vertical, 8)
             }
         }
-    }
-    @ViewBuilder private var containerView: some View {
-        if case .backdrop = thumbnailType {
-            VStack(alignment: .leading, spacing: 8) {
-                imageView
-                Text(movie.title)
-                    .font(.headline)
-                    .lineLimit(1)
-            }
-        } else {
-            imageView
-        }
-    }
-    private var imageView: some View {
-        ZStack {
-            Color.gray.opacity(0.3)
-            if case .poster(let showTitle) = thumbnailType, showTitle {
-                Text(movie.title)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-                    .lineLimit(4)
-            }
-            if let image = imageLoader.image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .layoutPriority(-1)
-            }
-        }
-        .cornerRadius(8)
-        .shadow(radius: 4)
+        .navigationTitle(title)
     }
 }
 
-struct MoviePosterCard_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            MovieThumbnailView(movie: Movie.stubbedMovie, thumbnailType: .poster(showTitle: true))
-                .frame(width: 204, height: 306)
-            MovieThumbnailView(movie: Movie.stubbedMovie, thumbnailType: .backdrop)
+fileprivate extension View {
+    @ViewBuilder func movieThumbnailViewFrame(thumbnailType: MovieThumbnailType) -> some View {
+        switch thumbnailType {
+        case .poster:
+            self.frame(width: 204, height: 306)
+        case .backdrop:
+            self
                 .aspectRatio(16/9, contentMode: .fit)
                 .frame(height: 160)
+        }
+    }
+}
+
+struct MovieThumbnailView_Previews: PreviewProvider {
+    static let stubbedMovies = Movie.stubbedMovies
+    
+    static var previews: some View {
+        Group {
+            MovieThumbnailView(title: "Now playing", movies: stubbedMovies, thumbnailType: .poster(showTitle: true))
+            MovieThumbnailView(title: "Upcoming", movies: stubbedMovies, thumbnailType: .backdrop)
         }
     }
 }

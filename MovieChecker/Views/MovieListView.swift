@@ -18,7 +18,7 @@ struct MovieListView: View {
             List {
                 Group {
                     if nowPlayingState.movies != nil {
-                        MoviePosterView(title: "Now playing", movies: nowPlayingState.movies!)
+                        MovieThumbnailView(title: "Now playing", movies: nowPlayingState.movies!, thumbnailType: .poster())
                     } else {
                         LoadingView(isLoading: nowPlayingState.isLoading, error: nowPlayingState.error) {
                             nowPlayingState.loadMovies(with: .nowPlaying)
@@ -30,7 +30,7 @@ struct MovieListView: View {
                 
                 Group {
                     if upocomingState.movies != nil {
-                        MovieBackdropView(title: "Upcoming", movies: upocomingState.movies!)
+                        MovieThumbnailView(title: "Upcoming", movies: upocomingState.movies!, thumbnailType: .backdrop)
                     } else {
                         LoadingView(isLoading: upocomingState.isLoading, error: upocomingState.error) {
                             upocomingState.loadMovies(with: .upcoming)
@@ -42,7 +42,7 @@ struct MovieListView: View {
                 
                 Group {
                     if topRatedState.movies != nil {
-                        MovieBackdropView(title: "Top rated", movies: topRatedState.movies!)
+                        MovieThumbnailView(title: "Top rated", movies: topRatedState.movies!, thumbnailType: .backdrop)
                     } else {
                         LoadingView(isLoading: topRatedState.isLoading, error: topRatedState.error) {
                             topRatedState.loadMovies(with: .topRated)
@@ -54,7 +54,7 @@ struct MovieListView: View {
                 
                 Group {
                     if popularState.movies != nil {
-                        MovieBackdropView(title: "Popular", movies: popularState.movies!)
+                        MovieThumbnailView(title: "Popular", movies: popularState.movies!, thumbnailType: .backdrop)
                     } else {
                         LoadingView(isLoading: popularState.isLoading, error: popularState.error) {
                             popularState.loadMovies(with: .popular)
