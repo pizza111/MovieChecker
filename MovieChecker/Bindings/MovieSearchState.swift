@@ -9,8 +9,8 @@ import SwiftUI
 import Combine
 import Foundation
 
+@MainActor
 class MovieSearchState: ObservableObject {
-    
     @Published var query = ""
     @Published var movies: [Movie]?
     @Published var isLoading = false
@@ -21,7 +21,7 @@ class MovieSearchState: ObservableObject {
     let movieService: MovieService
     
     var isEmptyResults: Bool {
-        !self.query.isEmpty && self.movies != nil && self.movies!.isEmpty
+        !query.isEmpty && movies != nil && movies!.isEmpty
     }
     
     init(movieService: MovieService = MovieStore.shared) {
@@ -31,7 +31,7 @@ class MovieSearchState: ObservableObject {
     func startObserve() {
         guard subscriptionToken == nil else { return }
         
-        self.subscriptionToken = self.$query
+        subscriptionToken = $query
             .map { [weak self] text in
                 self?.movies = nil
                 self?.error = nil
@@ -48,15 +48,15 @@ class MovieSearchState: ObservableObject {
     }
     
     func search(query: String) async {
-        self.movies = nil
-        self.isLoading = false
-        self.error = nil
+        movies = nil
+        isLoading = false
+        error = nil
         
         guard !query.isEmpty else {
             return
         }
         
-        self.isLoading = true
+        isLoading = true
         
         do {
             let movies = try await movieService.searchMovie(query: query)
@@ -70,7 +70,7 @@ class MovieSearchState: ObservableObject {
     }
     
     deinit {
-        self.subscriptionToken?.cancel()
-        self.subscriptionToken = nil
+        subscriptionToken?.cancel()
+        subscriptionToken = nil
     }
 }

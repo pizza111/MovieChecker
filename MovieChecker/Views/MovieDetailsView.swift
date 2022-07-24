@@ -14,7 +14,9 @@ struct MovieDetailsView: View {
     var body: some View {
         ZStack {
             LoadingView(isLoading: movieDetailsState.isLoading, error: movieDetailsState.error) {
-                movieDetailsState.loadMovie(id: movieId)
+                Task {
+                    await movieDetailsState.loadMovie(id: movieId)
+                }
             }
             if movieDetailsState.movie != nil {
                 MovieDetailsListView(movie: movieDetailsState.movie!)
@@ -22,7 +24,9 @@ struct MovieDetailsView: View {
         }
         .navigationTitle(movieDetailsState.movie?.title ?? "")
         .onAppear {
-            movieDetailsState.loadMovie(id: movieId)
+            Task {
+                await movieDetailsState.loadMovie(id: movieId)                
+            }
         }
     }
 }

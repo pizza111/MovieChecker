@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class MovieListState: ObservableObject {
     @Published var movies: [Movie]?
     @Published var isLoading = false
@@ -17,19 +18,16 @@ class MovieListState: ObservableObject {
     init(movieService: MovieService = MovieStore.shared) {
         self.movieService = movieService
     }
-    func loadMovies(with enpoint: MovieListEndpoint) {
+    func loadMovies(with enpoint: MovieListEndpoint) async {
         movies = nil
         isLoading = false
-        movieService.fetchMovies(from: enpoint) { [weak self] (result) in
-            guard let self = self else { return }
+        do {
+            let movies = try await movieService.fetchMovies(from: enpoint)
             self.isLoading = false
-            
-            switch result {
-            case .success(let response):
-                self.movies = response.results
-            case .failure(let error):
-                self.error = error as NSError
-            }
+            self.movies = movies
+        } catch {
+            self.isLoading = false
+            self.error = error as NSError
         }
     }
 }
