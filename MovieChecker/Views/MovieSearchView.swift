@@ -14,15 +14,17 @@ struct MovieSearchView: View {
     var body: some View {
         NavigationView {
             List {
-                SearchBarView(placeholder: "Search movies", text: self.$movieSearchState.query)
+                SearchBarView(placeholder: "Search movies", text: $movieSearchState.query)
                     .listRowInsets(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
                 
-                LoadingView(isLoading: self.movieSearchState.isLoading, error: self.movieSearchState.error) {
-                    self.movieSearchState.search(query: self.movieSearchState.query)
+                LoadingView(isLoading: movieSearchState.isLoading, error: movieSearchState.error) {
+                    Task {
+                        await movieSearchState.search(query: movieSearchState.query)
+                    }
                 }
                 
-                if self.movieSearchState.movies != nil {
-                    ForEach(self.movieSearchState.movies!) { movie in
+                if movieSearchState.movies != nil {
+                    ForEach(movieSearchState.movies!) { movie in
                         NavigationLink(destination: MovieDetailsView(movieId: movie.id)) {
                             VStack(alignment: .leading) {
                                 Text(movie.title)
@@ -33,7 +35,7 @@ struct MovieSearchView: View {
                 }
             }
             .onAppear {
-                self.movieSearchState.startObserve()
+                movieSearchState.startObserve()
             }
             .navigationBarTitle("Search")
         }

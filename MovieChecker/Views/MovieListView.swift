@@ -21,7 +21,9 @@ struct MovieListView: View {
                         MovieThumbnailView(title: "Now playing", movies: nowPlayingState.movies!, thumbnailType: .poster())
                     } else {
                         LoadingView(isLoading: nowPlayingState.isLoading, error: nowPlayingState.error) {
-                            nowPlayingState.loadMovies(with: .nowPlaying)
+                            Task {
+                                await nowPlayingState.loadMovies(with: .nowPlaying)
+                            }
                         }
                     }
                 }
@@ -33,7 +35,9 @@ struct MovieListView: View {
                         MovieThumbnailView(title: "Upcoming", movies: upocomingState.movies!, thumbnailType: .backdrop)
                     } else {
                         LoadingView(isLoading: upocomingState.isLoading, error: upocomingState.error) {
-                            upocomingState.loadMovies(with: .upcoming)
+                            Task {
+                                await upocomingState.loadMovies(with: .upcoming)
+                            }
                         }
                     }
                 }
@@ -45,7 +49,9 @@ struct MovieListView: View {
                         MovieThumbnailView(title: "Top rated", movies: topRatedState.movies!, thumbnailType: .backdrop)
                     } else {
                         LoadingView(isLoading: topRatedState.isLoading, error: topRatedState.error) {
-                            topRatedState.loadMovies(with: .topRated)
+                            Task {
+                                await topRatedState.loadMovies(with: .topRated)
+                            }
                         }
                     }
                 }
@@ -57,7 +63,9 @@ struct MovieListView: View {
                         MovieThumbnailView(title: "Popular", movies: popularState.movies!, thumbnailType: .backdrop)
                     } else {
                         LoadingView(isLoading: popularState.isLoading, error: popularState.error) {
-                            popularState.loadMovies(with: .popular)
+                            Task {
+                                await popularState.loadMovies(with: .popular)
+                            }
                         }
                     }
                 }
@@ -67,10 +75,12 @@ struct MovieListView: View {
             .navigationTitle("The Movie")
             .listStyle(.plain)
             .onAppear {
-                nowPlayingState.loadMovies(with: .nowPlaying)
-                upocomingState.loadMovies(with: .upcoming)
-                topRatedState.loadMovies(with: .topRated)
-                popularState.loadMovies(with: .popular)
+                Task {
+                    await nowPlayingState.loadMovies(with: .nowPlaying)
+                    await upocomingState.loadMovies(with: .upcoming)
+                    await topRatedState.loadMovies(with: .topRated)
+                    await popularState.loadMovies(with: .popular)
+                }
             }
         }
     }
