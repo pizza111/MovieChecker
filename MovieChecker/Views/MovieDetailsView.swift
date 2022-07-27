@@ -9,43 +9,99 @@ import SwiftUI
 
 struct MovieDetailsView: View {
     let movieId: Int
-    @ObservedObject private var movieDetailsState = MovieDetailState()
+    let movieTitle: String
+    @StateObject private var movieDetailsState = MovieDetailState()
+    @State private var selectedTrailerURL: URL?
     
     var body: some View {
-        ZStack {
-            LoadingView(isLoading: movieDetailsState.isLoading, error: movieDetailsState.error) {
-                Task {
-                    await movieDetailsState.loadMovie(id: movieId)
-                }
-            }
-            if movieDetailsState.movie != nil {
-                MovieDetailsListView(movie: movieDetailsState.movie!)
+        List {
+            if let movie = movieDetailsState.movie {
+                MovieDetailsImage(imageURL: movie.backdropURL)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    .listRowSeparator(.hidden)
+                MovieDetailsListView(movie: movie, selectedTrailerURL: $selectedTrailerURL)
             }
         }
-        .navigationTitle(movieDetailsState.movie?.title ?? "")
-        .onAppear {
-            Task {
-                await movieDetailsState.loadMovie(id: movieId)                
-            }
+        .listStyle(.plain)
+        .navigationTitle(movieTitle)
+        .task(loadMovie)
+        .overlay(
+            DataFetchPhaseOverlayView(phase: movieDetailsState.phase, retryAction: loadMovie)
+        )
+        .sheet(item: $selectedTrailerURL) {
+            SafariView(url: $0)
+                .edgesIgnoringSafeArea(.bottom)
         }
+    }
+    @Sendable
+    private func loadMovie() {
+        Task { await self.movieDetailsState.loadMovie(id: movieId) }
     }
 }
 
 struct MovieDetailsListView: View {
     let movie: Movie
-    @State private var selectedTrailer: MovieVideo?
-    private let imageLoader = ImageLoader() 
+    @Binding var selectedTrailerURL: URL?
+//    @State private var selectedTrailer: MovieVideo?
+//    private let imageLoader = ImageLoader()
         
     var body: some View {
-        List {
-            MovieDetailsImage(imageLoader: imageLoader, imageURL: movie.backdropURL)
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-            HStack {
-                Text(movie.genreText)
-                Text(".")
-                Text(movie.yearText)
-                Text(movie.durationText)
+            movieDescriptionSection
+                .listRowSeparator(.visible)
+            movieCastSection
+                .listRowSeparator(.hidden)
+            movieTrailerSection
+//        .sheet(item: $selectedTrailer) { trailer in
+//            SafariView(url: trailer.youtubeURL!)
+//        }
+    }
+    private var movieCastSection: some View {
+        HStack(alignment: .top, spacing: 4) {
+            if let cast = movie.cast, !cast.isEmpty {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Starring").font(.headline)
+                    ForEach(cast.prefix(9)) {
+                        Text($0.name)
+                    }
+                }
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                Spacer()
             }
+            if let crew = movie.crew, !crew.isEmpty {
+                VStack(alignment: .leading, spacing: 4) {
+                    if let directors = movie.directors, !directors.isEmpty {
+                        Text("Director(s)")
+                            .font(.headline)
+                        ForEach(directors.prefix(2)) {
+                            Text($0.name)
+                        }
+                    }
+                    if let producers = movie.producers, !producers.isEmpty {
+                        Text("Producer(s)")
+                            .font(.headline)
+                            .padding(.top)
+                        ForEach(producers.prefix(2)) {
+                            Text($0.name)
+                        }
+                    }
+                    if let screenWriters = movie.screenWriters, !screenWriters.isEmpty {
+                        Text("Writer(s)")
+                            .font(.headline)
+                            .padding(.top)
+                        ForEach(screenWriters.prefix(2)) {
+                            Text($0.name)
+                        }
+                    }
+                }
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .padding(.vertical)
+    }
+    private var movieDescriptionSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text(movieGenreYearDurationText)
+                .font(.headline)
             Text(movie.overview)
             HStack {
                 if !movie.ratingText.isEmpty {
@@ -53,80 +109,45 @@ struct MovieDetailsListView: View {
                 }
                 Text(movie.scoreText)
             }
-            HStack(alignment: .top, spacing: 4) {
-                if movie.cast != nil && movie.cast!.count > 0 {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Starring").font(.headline)
-                        ForEach(movie.cast!.prefix(9)) { cast in
-                            Text(cast.name)
-                        }
-                    }
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    Spacer()
-                }
-                if movie.crew != nil && movie.crew!.count > 0 {
-                    VStack(alignment: .leading, spacing: 4) {
-                        if movie.directors != nil && movie.directors!.count > 0 {
-                            Text("Director(s)")
-                                .font(.headline)
-                            ForEach(movie.directors!.prefix(2)) { crew in
-                                Text(crew.name)
-                            }
-                        }
-                        if movie.producers != nil && movie.producers!.count > 0 {
-                            Text("Producer(s)")
-                                .font(.headline)
-                                .padding(.top)
-                            ForEach(movie.directors!.prefix(2)) { crew in
-                                Text(crew.name)
-                            }
-                        }
-                        if movie.screenWriters != nil && movie.screenWriters!.count > 0 {
-                            Text("Writer(s)")
-                                .font(.headline)
-                                .padding(.top)
-                            ForEach(movie.directors!.prefix(2)) { crew in
-                                Text(crew.name)
-                            }
-                        }
-                    }
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                }
-            }
-            if movie.youtubeTrailers != nil && movie.youtubeTrailers!.count > 0 {
-                Text("Trailers")
-                    .font(.headline)
-                ForEach(movie.youtubeTrailers!) { trailer in
-                    Button {
-                        selectedTrailer = trailer
-                    } label: {
-                        HStack {
-                            Text(trailer.name)
-                            Spacer()
-                            Image(systemName: "play.circle.fill")
-                                .foregroundColor(Color(uiColor: .systemBlue))
-                        }
+        }
+        .padding(.vertical)
+    }
+    @ViewBuilder
+    private var movieTrailerSection: some View {
+        if let trailers = movie.youtubeTrailers, !trailers.isEmpty {
+            Text("Trailers")
+                .font(.headline)
+            ForEach(trailers) { trailer in
+                Button {
+                    guard let url = trailer.youtubeURL else { return }
+                    selectedTrailerURL = url
+                } label: {
+                    HStack {
+                        Text(trailer.name)
+                        Spacer()
+                        Image(systemName: "play.circle.fill")
+                            .foregroundColor(Color(uiColor: .systemBlue))
                     }
                 }
             }
         }
-        .sheet(item: $selectedTrailer) { trailer in
-            SafariView(url: trailer.youtubeURL!)
-        }
+    }
+    private var movieGenreYearDurationText: String {
+        "\(movie.genreText) · \(movie.yearText) · \(movie.durationText)"
     }
 }
 
 struct MovieDetailsImage: View {
-    @ObservedObject  var imageLoader: ImageLoader
+    @StateObject private var imageLoader = ImageLoader()
+//    @ObservedObject  var imageLoader: ImageLoader
 //    @ObservedObject private var imageLoader = ImageLoader()
     let imageURL: URL
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .fill(Color.gray.opacity(0.3))
-            if imageLoader.image != nil {
-                Image(uiImage: imageLoader.image!)
+            Color.gray.opacity(0.3)
+            if let image = imageLoader.image {
+                Image(uiImage: image)
                     .resizable()
             }
         }
@@ -137,10 +158,14 @@ struct MovieDetailsImage: View {
     }
 }
 
+extension URL: Identifiable {
+    public var id: Self { self }
+}
+
 struct MovieDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MovieDetailsView(movieId: Movie.stubbedMovie.id)
+            MovieDetailsView(movieId: Movie.stubbedMovie.id, movieTitle: "The Godfather 2")
         }
     }
 }
