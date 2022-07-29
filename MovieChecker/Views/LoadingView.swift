@@ -11,7 +11,7 @@ struct LoadingView: View {
     let isLoading: Bool
     let error: NSError?
     let retryAction: (() -> ())?
-    
+
     var body: some View {
         Group {
             if isLoading {

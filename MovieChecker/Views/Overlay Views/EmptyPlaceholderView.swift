@@ -17,7 +17,7 @@ struct EmptyPlaceholderView: View {
             if let image = image {
                 image
                     .imageScale(.large)
-                    .font(.system(size: 52))
+                    .font(.system(size: 40))
             }
             Text(text)
             Spacer()
