@@ -53,7 +53,7 @@ struct MovieThumbnailCard: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-                    .layoutPriority(-1)
+                    .layoutPriority(1)
             }
         }
         .cornerRadius(8)
