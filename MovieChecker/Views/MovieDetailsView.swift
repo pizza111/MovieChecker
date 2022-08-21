@@ -42,8 +42,6 @@ struct MovieDetailsView: View {
 struct MovieDetailsListView: View {
     let movie: Movie
     @Binding var selectedTrailerURL: URL?
-//    @State private var selectedTrailer: MovieVideo?
-//    private let imageLoader = ImageLoader()
         
     var body: some View {
             movieDescriptionSection
@@ -51,9 +49,6 @@ struct MovieDetailsListView: View {
             movieCastSection
                 .listRowSeparator(.hidden)
             movieTrailerSection
-//        .sheet(item: $selectedTrailer) { trailer in
-//            SafariView(url: trailer.youtubeURL!)
-//        }
     }
     private var movieCastSection: some View {
         HStack(alignment: .top, spacing: 4) {
@@ -139,8 +134,6 @@ struct MovieDetailsListView: View {
 
 struct MovieDetailsImage: View {
     @StateObject private var imageLoader = ImageLoader()
-//    @ObservedObject  var imageLoader: ImageLoader
-//    @ObservedObject private var imageLoader = ImageLoader()
     let imageURL: URL
     
     var body: some View {
