@@ -8,7 +8,6 @@
 import SwiftUI
 import UIKit
 
-//we use NSCache to cache the data locally. It's similar to dictionary but it has build in mechanism to automatically relase objects from the memory if the system memory is low. We also store this as a global variable.
 private let _imageCache = NSCache<AnyObject, AnyObject>()
 
 class ImageLoader: ObservableObject {

@@ -45,8 +45,7 @@ class MovieStore: MovieService {
         ])
         return movieResponse.results
     }
-
-    ///helper method URL into data, optional dictionary as a parameter
+    
     private func loadURLAndDecode<D: Decodable>(url: URL, params: [String: String]? = nil) async throws -> D {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             throw MovieError.invalidEndpoint
