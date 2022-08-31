@@ -11,6 +11,7 @@ struct MovieSection: Identifiable {
     let id = UUID()
     let movies: [Movie]
     let endpoint: MovieListEndpoint
+    
     var title: String {
         endpoint.description
     }
