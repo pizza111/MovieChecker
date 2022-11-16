@@ -5,5 +5,4 @@ tapping on one of them.
 - fetch JSON data from an API
 - structure networking with MVVM
 - Async/Await
-- unit tests
 - dependency injection
