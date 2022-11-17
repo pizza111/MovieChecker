@@ -4,4 +4,6 @@ MovieChecker displays 4 different horizontal lists depend on the genre(Now Playi
 - structure networking with MVVM
 - Async/Await
 - dependency injection
+
+
 ![ezgif com-gif-maker-4](https://user-images.githubusercontent.com/92029663/202388139-4c8209ff-a7a2-48bc-8780-b36ab3ed4256.gif)
