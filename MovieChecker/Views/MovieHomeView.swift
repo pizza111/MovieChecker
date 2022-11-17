@@ -20,8 +20,8 @@ struct MovieHomeView: View {
         }
         .navigationTitle("The Movie")
         .listStyle(.plain)
-        .task { loadMovies(invalidateCache: false) } /// if it's success we won't be fetching an API again
-        .refreshable { loadMovies(invalidateCache: true) } ///we invalid cache, we want to fetch new dat from the server
+        .task { loadMovies(invalidateCache: false) }
+        .refreshable { loadMovies(invalidateCache: true) }
         .overlay(DataFetchPhaseOverlayView(phase: movieHomeState.phase, retryAction: {
             loadMovies(invalidateCache: true)
         }))
