@@ -14,10 +14,6 @@ class MovieDetailState: ObservableObject {
     var movie: Movie? {
         phase.value ?? nil
     }
-//    @Published var movie: Movie?
-//    @Published var isLoading = false
-//    @Published var error: NSError?
-    
     init(movieService: MovieService = MovieStore.shared) {
         self.movieService = movieService
     }
