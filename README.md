@@ -3,6 +3,7 @@ MovieChecker displays 4 different horizontal lists depend on the genre(Now Playi
 - fetch JSON data from an API
 - structure networking with MVVM
 - Async/Await
+- Combine
 - dependency injection
 
 
